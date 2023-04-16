@@ -8,8 +8,7 @@ import {
 import { LubrificationSystemServices } from "./lubrificationSystemServices";
 
 class LubricationSystemServicesRepository
-  implements ILubricationSystemServicesRepository
-{
+  implements ILubricationSystemServicesRepository {
   async create(
     data: ICreateLubricationSystemServiceDTO
   ): Promise<LubrificationSystemServices> {
@@ -87,7 +86,6 @@ class LubricationSystemServicesRepository
     const result = await LubricationSystemServicesRepository.delete({
       id: In(data.ids),
     });
-    console.log(result);
 
     return result;
   }

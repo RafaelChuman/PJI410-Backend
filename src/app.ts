@@ -36,6 +36,8 @@ app.use("/lubrificationSystems", lubrificationSystemServicesRoutes);
 
 app.use("/ers", ersRoutes);
 
+app.use("/oilMonitor", oilMonitorRoutes);
+
 app.use(
     (err: Error, request: Request, response: Response, next: NextFunction) => {
 

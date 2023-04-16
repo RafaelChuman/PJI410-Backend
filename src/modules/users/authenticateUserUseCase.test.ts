@@ -25,17 +25,23 @@ describe("Unit Test from User", () => {
     });
 
     afterAll(async () => {
-        await PostgresDS.destroy();
-
+        if (PostgresDS.isInitialized) {
+            await PostgresDS.destroy();
+        }
         serverHocked.close();
     })
 
     it("Should get a List of Users", async () => {
 
-        const response = await request(serverHocked).get('/users');
+        if (PostgresDS.isInitialized) {
+            const response = await request(serverHocked).get('/users');
 
-        console.log(response.body);
+            console.log(response.body);
 
-        expect(response.status).toBe(201);
+            expect(response.status).toBe(201);
+        }
+        else {
+            throw ("DATABASE NOT INITIALIZED")
+        }
     })
 })

@@ -5,6 +5,7 @@ import { Collaborators } from "./entity/Collaborators/collaborators";
 import { Zones } from "./entity/Zones/zones";
 import { LubrificationSystemServices } from "./entity/LubricationSystemServices/lubrificationSystemServices";
 import { ERs } from "./entity/ERs/ERs";
+import { OilMonitor } from "./entity/OilMonitor/oilMonitor";
 
 export const PostgresDS = new DataSource({
     type: "postgres",
@@ -14,7 +15,7 @@ export const PostgresDS = new DataSource({
     password: "pji410_univesp!",
     database: "postgres",
     name: "default",
-    entities: [Users, Collaborators, Activities, Zones, ERs, LubrificationSystemServices],
+    entities: [Users, Collaborators, Activities, Zones, ERs, LubrificationSystemServices, OilMonitor],
     migrations: ["./src/migration/*.m.ts"],
 
 })
