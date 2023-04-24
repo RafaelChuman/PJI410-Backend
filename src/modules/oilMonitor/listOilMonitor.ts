@@ -10,7 +10,8 @@ export class ListOilMonitor {
 
         const oilMonitorRepository = new OilMonitorRepository();
 
-        const response = oilMonitorRepository.listOilMonitorByER(data);
+        const response = await oilMonitorRepository.listOilMonitorByER(data);
+
 
         return resp.status(200).json(response);
     }

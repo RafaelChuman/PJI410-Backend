@@ -3,6 +3,7 @@ import { OilMonitor } from "./oilMonitor";
 
 interface ICreateOilMonitorDTO {
     oilLevel: number;
+    ERId: string;
 }
 
 interface IListOilMonitorByER {

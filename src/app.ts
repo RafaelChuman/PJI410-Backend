@@ -12,6 +12,7 @@ import { lubrificationSystemServicesRoutes } from "./routes/lubricationSystemSer
 import { ensureAuthenticated } from "./midlewares/ensureAuthenticated";
 import { collaboratorsRoutes } from "./routes/collaborators.routes";
 import { ersRoutes } from "./routes/ers.routes";
+import { oilMonitorRoutes } from "./routes/oilMonitor.routes";
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(express.json());
 app.use(authenticateRoutes);
 
 app.use("/users", usersRoutes);
+
+app.use("/oilMonitor", oilMonitorRoutes);
 
 app.use(ensureAuthenticated);
 
@@ -36,7 +39,7 @@ app.use("/lubrificationSystems", lubrificationSystemServicesRoutes);
 
 app.use("/ers", ersRoutes);
 
-app.use("/oilMonitor", oilMonitorRoutes);
+
 
 app.use(
     (err: Error, request: Request, response: Response, next: NextFunction) => {
