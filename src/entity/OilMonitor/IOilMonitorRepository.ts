@@ -7,7 +7,15 @@ interface ICreateOilMonitorDTO {
 }
 
 interface IListOilMonitorByER {
-    ERId: string;
+    ERId: string[];
+    dateBegin?: Date;
+    dateEnd?: Date;
+}
+
+interface IListOilMonito1 {
+    ERId?: string[];
+    dateBegin?: Date;
+    dateEnd?: Date;
 }
 
 interface IDeleteOilMonitorDTO {
@@ -18,8 +26,9 @@ interface IOilMonitorRepository {
 
     createOilMonitor(data: ICreateOilMonitorDTO): Promise<OilMonitor | null>;
     listOilMonitorByER(data: IListOilMonitorByER): Promise<OilMonitor[] | null>;
+    listOilMonitor(data: IListOilMonito1): Promise<OilMonitor[] | null>;
     deleteOilMonitor(data: IDeleteOilMonitorDTO): Promise<DeleteResult>;
 
 }
 
-export { IOilMonitorRepository, IDeleteOilMonitorDTO, IListOilMonitorByER, ICreateOilMonitorDTO }
+export { IOilMonitorRepository, IDeleteOilMonitorDTO, IListOilMonitorByER, ICreateOilMonitorDTO, IListOilMonito1 }
