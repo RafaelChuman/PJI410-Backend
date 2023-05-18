@@ -12,6 +12,12 @@ interface ICreateLubricationSystemServiceDTO {
   er: ERs;
 }
 
+interface IListLubricationSystemService {
+  dateBegin?: Date;
+  dateEnd?: Date;
+}
+
+
 interface IDeleteLubricationSystemServiceDTO {
   ids: string[];
 }
@@ -24,7 +30,7 @@ interface ILubricationSystemServicesRepository {
   // findByEmail(email: string): User | undefined;
   // turnAdmin(user: User): User;
   deleteById(data: IDeleteLubricationSystemServiceDTO): Promise<DeleteResult>;
-  list(ERId:string): Promise<LubrificationSystemServices[]>;
+  list(filter: IListLubricationSystemService): Promise<LubrificationSystemServices[]>;
   listByMonth(date:Date): Promise<LubrificationSystemServices[]>;
   listAddByMonth(date: Date): Promise<LubrificationSystemServices[]>;
 }
@@ -33,4 +39,5 @@ export {
   ILubricationSystemServicesRepository,
   ICreateLubricationSystemServiceDTO,
   IDeleteLubricationSystemServiceDTO,
+  IListLubricationSystemService
 };

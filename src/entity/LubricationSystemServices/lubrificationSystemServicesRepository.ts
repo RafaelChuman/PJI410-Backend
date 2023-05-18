@@ -1,14 +1,16 @@
 import { PostgresDS } from "@src/data-source";
-import { DeleteQueryBuilder, DeleteResult, In, MoreThanOrEqual } from "typeorm";
+import { Between, DeleteResult, In, MoreThanOrEqual  } from "typeorm";
 import {
   ILubricationSystemServicesRepository,
   ICreateLubricationSystemServiceDTO,
   IDeleteLubricationSystemServiceDTO,
+  IListLubricationSystemService,
 } from "./ILubrificationSystemServicesRepository";
 import { LubrificationSystemServices } from "./lubrificationSystemServices";
 
 class LubricationSystemServicesRepository
-  implements ILubricationSystemServicesRepository {
+  implements ILubricationSystemServicesRepository
+{
   async create(
     data: ICreateLubricationSystemServiceDTO
   ): Promise<LubrificationSystemServices> {
@@ -57,21 +59,60 @@ class LubricationSystemServicesRepository
     return lubrificationSystemServices;
   }
 
-  async list(ERId: string): Promise<LubrificationSystemServices[]> {
-    const LubricationSystemServicesRepository =
+  // async list(ERId: string): Promise<LubrificationSystemServices[]> {
+  //   const LubricationSystemServicesRepository =
+  //     PostgresDS.manager.getRepository(LubrificationSystemServices);
+
+  //   let whereConstrant = {};
+
+  //   const result = await LubricationSystemServicesRepository.find({
+  //     relations: {
+  //       activity: true,
+  //       collaborator: true,
+  //       er: true,
+  //     },
+  //     where: {
+  //       er: {
+  //         id: ERId,
+  //       },
+  //     },
+  //   });
+
+  //   return result;
+  // }
+
+  async list(
+    filter: IListLubricationSystemService
+  ): Promise<LubrificationSystemServices[]> {
+    const lsRepository =
       PostgresDS.manager.getRepository(LubrificationSystemServices);
 
-    const result = await LubricationSystemServicesRepository.find({
+    let whereConstrant = {};
+
+    if (filter.dateBegin && !filter.dateEnd) {
+      whereConstrant = {
+        ...whereConstrant,
+        createdAt: MoreThanOrEqual(filter.dateBegin),
+      };
+    }
+
+    if (filter.dateBegin && filter.dateEnd) {
+      whereConstrant = {
+        ...whereConstrant,
+        createdAt: Between(filter.dateBegin, filter.dateEnd),
+      };
+    }
+
+    const result = await lsRepository.find({
       relations: {
         activity: true,
         collaborator: true,
-        er: true,
-      },
-      where: {
         er: {
-          id: ERId,
-        },
+          zone:true
+        }
+        
       },
+      where: whereConstrant
     });
 
     return result;
@@ -92,3 +133,7 @@ class LubricationSystemServicesRepository
 }
 
 export { LubricationSystemServicesRepository };
+  function BiggerThan(dateBegin: Date, dateEnd: undefined) {
+    throw new Error("Function not implemented.");
+  }
+

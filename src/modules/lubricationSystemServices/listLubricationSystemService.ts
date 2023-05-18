@@ -1,41 +1,44 @@
+import { IListLubricationSystemService } from "@src/entity/LubricationSystemServices/ILubrificationSystemServicesRepository";
 import { LubricationSystemServicesRepository } from "@src/entity/LubricationSystemServices/lubrificationSystemServicesRepository";
 import { Request, Response } from "express";
 
 export class ListLubricationSystemServices {
   async execute(request: Request, response: Response): Promise<Response> {
-    const tempID = request.query.id;
-    const tempDateId = request.query.dateId;
-    const tempDateAdd = request.query.dateAdd;
+    // const tempID = request.query.id;
+    // const tempDateId = request.query.dateId;
+    // const tempDateAdd = request.query.dateAdd;
 
     const lubricationSystemServicesRespository =
-    new LubricationSystemServicesRepository();
+      new LubricationSystemServicesRepository();
 
-    if (typeof tempDateAdd == "string") {
-      const date = new Date(tempDateAdd);
+    const data: IListLubricationSystemService = request.query;
 
-      const lubricationSystemServices =
-        await lubricationSystemServicesRespository.listAddByMonth(date);
+    // if (typeof tempDateAdd == "string") {
+    //   const date = new Date(tempDateAdd);
 
-      return response.status(200).json(lubricationSystemServices);
-    }
+    //   const lubricationSystemServices =
+    //     await lubricationSystemServicesRespository.listAddByMonth(date);
 
-    
-    if (typeof tempDateId == "string") {
-      const date = new Date(tempDateId);
+    //   return response.status(200).json(lubricationSystemServices);
+    // }
 
-      const lubricationSystemServices =
-        await lubricationSystemServicesRespository.listByMonth(date);
+    // if (typeof tempDateId == "string") {
+    //   const date = new Date(tempDateId);
 
-      return response.status(200).json(lubricationSystemServices);
-    }
+    //   const lubricationSystemServices =
+    //     await lubricationSystemServicesRespository.listByMonth(date);
 
-    if (typeof tempID == "string") {
-      const ERId = tempID;
+    //   return response.status(200).json(lubricationSystemServices);
+    // }
 
-      const lubricationSystemServices =
-        await lubricationSystemServicesRespository.list(ERId);
 
-      return response.status(200).json(lubricationSystemServices);
+    if (!data.dateEnd || (typeof data.dateBegin == "string")) {
+      if (data.dateBegin && typeof data.dateBegin == "string") {
+        const lubricationSystemServices =
+          await lubricationSystemServicesRespository.list(data);
+
+        return response.status(200).json(lubricationSystemServices);
+      }
     }
     return response.status(200).json();
   }
