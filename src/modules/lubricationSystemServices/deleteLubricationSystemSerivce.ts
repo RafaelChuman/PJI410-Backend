@@ -15,8 +15,6 @@ export class DeleteLubricationSystemService {
         ids: idParam,
       };
 
-      console.log(data);
-
       const resp = await lubricationSystemServiceRespository.deleteById(data);
 
       return response.status(200).json(resp);

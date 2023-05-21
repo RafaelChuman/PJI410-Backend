@@ -71,8 +71,6 @@ class OilMonitorRepository implements IOilMonitorRepository {
       
     }
 
-    console.log(whereConstrant);
-    
     result = await oilMonitorRep.find({
       relations: {
         er: true,

@@ -36,8 +36,6 @@ describe("Unit Test from User", () => {
         if (PostgresDS.isInitialized) {
             const response = await request(serverHocked).get('/users');
 
-            console.log(response.body);
-
             expect(response.status).toBe(201);
         }
         else {
