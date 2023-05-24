@@ -75,8 +75,11 @@ class CollaboratorsRepository implements ICollaboratorsRepository {
           id: data.id
       });
   
-  if(!collaboratorUpd) return null;
-
+  if(!collaboratorUpd) 
+  {
+    console.log("Collaborator not identified");
+    return null;
+  }
   collaboratorUpd.name = data.name;
   collaboratorUpd.cellphone = data.cellphone;
   collaboratorUpd.whatsApp = data.whatsApp;
