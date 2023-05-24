@@ -8,12 +8,9 @@ export class ListOilMonitor {
 
         const data: IListOilMonito1 = req.query;
 
-        console.log(data);
-
         const oilMonitorRepository = new OilMonitorRepository();
 
         const response = await oilMonitorRepository.listOilMonitor(data);
-
 
         return resp.status(200).json(response);
     }

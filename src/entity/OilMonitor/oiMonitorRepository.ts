@@ -73,7 +73,9 @@ class OilMonitorRepository implements IOilMonitorRepository {
 
     result = await oilMonitorRep.find({
       relations: {
-        er: true,
+        er: {
+          zone:true
+        }
       },
       where: whereConstrant,
     });
